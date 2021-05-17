@@ -54,18 +54,15 @@
         }
     }
     likeClick=function async (event) {
-     try{
-            event.preventDefault()
-            console.log(event.target)
-            let url = event.target.getAttribute('href')
-            const result = makeRequest(url)
-            let but = event.target.parentElement.getElementsByClassName('disabled')
-            but[0].classList.remove('disabled')
-            event.target.classList.add('disabled')
-            let count = event.target.parentElement.getElementsByClassName('counter')
-        }
-        catch (error){
-            console.log(error)
-        }
+        event.preventDefault()
+        console.log(event.target)
+        let url = event.target.getAttribute('href')
+        const result = makeRequest(url)
+        let but = event.target.parentElement.getElementsByClassName('disabled')
+        but[0].classList.remove('disabled')
+        event.target.classList.add('disabled')
+        let count = event.target.parentElement.getElementsByClassName('counter')
+
+
     }
 </script>
