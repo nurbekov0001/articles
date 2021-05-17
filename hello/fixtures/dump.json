@@ -1,0 +1,206 @@
+[
+{
+  "model": "article.article",
+  "pk": 1,
+  "fields": {
+    "created_at": "2021-02-22T14:10:25.751Z",
+    "updated_at": "2021-04-13T05:24:24.092Z",
+    "title": "Заголовок статьи 1",
+    "content": "Контент нашей первой статьи",
+    "author": 12,
+    "like_article": null,
+    "tags": [
+      1,
+      2
+    ]
+  }
+},
+{
+  "model": "article.article",
+  "pk": 2,
+  "fields": {
+    "created_at": "2021-02-22T14:10:25.751Z",
+    "updated_at": "2021-04-13T05:24:24.098Z",
+    "title": "Заголовок статьи 2",
+    "content": "Контент нашей второй статьи",
+    "author": 12,
+    "like_article": null,
+    "tags": [
+      1
+    ]
+  }
+},
+{
+  "model": "article.article",
+  "pk": 3,
+  "fields": {
+    "created_at": "2021-02-22T14:10:25.751Z",
+    "updated_at": "2021-04-13T05:24:24.101Z",
+    "title": "Заголовок статьи 3",
+    "content": "Контент нашей третьей статьи",
+    "author": 12,
+    "like_article": null,
+    "tags": [
+      1
+    ]
+  }
+},
+{
+  "model": "article.article",
+  "pk": 4,
+  "fields": {
+    "created_at": "2021-02-22T14:10:25.751Z",
+    "updated_at": "2021-04-13T05:24:24.103Z",
+    "title": "Заголовок статьи 4",
+    "content": "Контент нашей четвёртой статьи",
+    "author": 12,
+    "like_article": null,
+    "tags": [
+      1,
+      2,
+      3
+    ]
+  }
+},
+{
+  "model": "article.article",
+  "pk": 5,
+  "fields": {
+    "created_at": "2021-02-22T14:10:25.751Z",
+    "updated_at": "2021-04-13T05:24:24.104Z",
+    "title": "Заголовок статьи 5",
+    "content": "Контент нашей пятой статьи",
+    "author": 12,
+    "like_article": null,
+    "tags": [
+      1
+    ]
+  }
+},
+{
+  "model": "article.articles_and_users_intermediate_table",
+  "pk": 3,
+  "fields": {
+    "created_at": "2021-05-17T11:15:43.100Z",
+    "updated_at": "2021-05-17T11:15:43.100Z",
+    "article": 1,
+    "user": 12
+  }
+},
+{
+  "model": "article.articles_and_users_intermediate_table",
+  "pk": 4,
+  "fields": {
+    "created_at": "2021-05-17T11:15:52.767Z",
+    "updated_at": "2021-05-17T11:15:52.767Z",
+    "article": 1,
+    "user": 11
+  }
+},
+{
+  "model": "article.articles_and_users_intermediate_table",
+  "pk": 28,
+  "fields": {
+    "created_at": "2021-05-17T12:04:46.069Z",
+    "updated_at": "2021-05-17T12:04:46.069Z",
+    "article": 3,
+    "user": 10
+  }
+},
+{
+  "model": "article.articles_and_users_intermediate_table",
+  "pk": 45,
+  "fields": {
+    "created_at": "2021-05-17T12:09:25.668Z",
+    "updated_at": "2021-05-17T12:09:25.668Z",
+    "article": 1,
+    "user": 10
+  }
+},
+{
+  "model": "article.intermediate_table_of_cometaries_and_users",
+  "pk": 2,
+  "fields": {
+    "created_at": "2021-05-17T11:14:53.522Z",
+    "updated_at": "2021-05-17T11:14:53.522Z",
+    "comment": 1,
+    "user": 11
+  }
+},
+{
+  "model": "article.intermediate_table_of_cometaries_and_users",
+  "pk": 15,
+  "fields": {
+    "created_at": "2021-05-17T12:10:07.064Z",
+    "updated_at": "2021-05-17T12:10:07.064Z",
+    "comment": 1,
+    "user": 10
+  }
+},
+{
+  "model": "article.comment",
+  "pk": 1,
+  "fields": {
+    "created_at": "2021-05-13T14:11:19.930Z",
+    "updated_at": "2021-05-13T14:11:19.930Z",
+    "article": 1,
+    "comment": "fdfdsf",
+    "author": 10,
+    "like_comment": null
+  }
+},
+{
+  "model": "article.tag",
+  "pk": 1,
+  "fields": {
+    "created_at": "2021-03-11T13:21:28.480Z",
+    "updated_at": "2021-03-11T13:21:28.480Z",
+    "tag": "Business"
+  }
+},
+{
+  "model": "article.tag",
+  "pk": 2,
+  "fields": {
+    "created_at": "2021-03-11T13:21:48.595Z",
+    "updated_at": "2021-03-11T13:21:48.595Z",
+    "tag": "Sport"
+  }
+},
+{
+  "model": "article.tag",
+  "pk": 3,
+  "fields": {
+    "created_at": "2021-03-11T13:44:35.534Z",
+    "updated_at": "2021-03-11T13:44:35.534Z",
+    "tag": "Health"
+  }
+},
+{
+  "model": "article.tag",
+  "pk": 4,
+  "fields": {
+    "created_at": "2021-03-11T13:45:56.445Z",
+    "updated_at": "2021-03-11T13:45:56.445Z",
+    "tag": "Politics"
+  }
+},
+{
+  "model": "accounts.profile",
+  "pk": 1,
+  "fields": {
+    "user": 12,
+    "birth_date": null,
+    "avatar": "avatars/hqdefault.jpg"
+  }
+},
+{
+  "model": "accounts.profile",
+  "pk": 2,
+  "fields": {
+    "user": 10,
+    "birth_date": null,
+    "avatar": "avatars/unnamed_1.jpg"
+  }
+}
+]

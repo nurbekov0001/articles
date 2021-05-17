@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block menu %}
+    {% if perms.article.add_article %}
+        <li><a href="{% url "article:add" %}">Создать статью</a></li>
+    {% endif %}
+
+    {% if perms.article.change_article %}
+        <li><a href="{% url "article:update" article.id %}">Редактировать статью</a></li>
+    {% endif %}
+
+    {% if perms.article.delete_article %}
+        <li><a href="{% url "article:delete" article.id %}">Удалить статью</a></li>
+    {% endif %}
+
+    {% if perms.article.add_comment %}
+        <li><a href="{% url "article:comment_create" article.id %}">Добавить Комментарий</a></li>
+    {% endif %}
+{% endblock menu %}
+
+{% block page_header %}Статья {{ article.id }}{% endblock page_header %}
+
+{% block content %}
+    <p>Title: {{ article.title }}</p>
+    <p>Author: {{ article.author }}</p>
+    <p>Content: {{ article.content }}</p>
+    <p>Tags: {% for tag in article.tags.all %}{{ tag.tag }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+  {% if user.is_authenticated %}
+            {% if user not in article.like_articles %}
+                <a class = 'link' id="like_article" href="{% url 'article:article_like' article.pk %}" onclick="likeClick(event)"> Like </a>
+            {% else %}
+                <a class = 'link' id="unlike_article" href="{% url 'article:article_unlike' article.pk %}" onclick=likeClick(event)>UnLike</a>
+            {% endif %}
+            <span >{{ article.like_articles.count}} </span>
+        {% endif %}
+
+    <h2>Comments:</h2>
+    {% for comment in article.comments.all %}
+        <p>{{ comment.author }}: {{ comment.comment }}
+
+        {% if user.is_authenticated  %}
+            <div>
+            <a class = 'link {% if article.pk in aricles_like %}disabled{% endif %}' id="like_article"
+               href="{% url 'article:comment_like' article.pk %}"
+           onclick="likeClick(event)"> Like </a>
+
+            <a class = 'link {% if article.pk not in aricles_like %}disabled{% endif %}' id="like_article"
+               href="{% url 'article:comment_unlike' article.pk %}"
+           onclick="likeClick(event)"> UnLike </a>
+            <span >{{ comment.like_comments.count}} </span>
+            </div>
+        {% endif %}
+        </p>
+    {% empty %}
+        <p>Нет комментариев :(</p>
+    {% endfor %}
+
+<script>
+    async function makeRequest(url, method='GET') {
+        let response = await fetch(url, {method});
+        if (response.ok) {
+            return await response.json();
+        } else {
+            let error = new Error(response.statusText);
+            error.response = response;
+            throw error;
+        }
+    }
+    likeClick=function async (event) {
+        try{
+            event.preventDefault()
+            console.log(event.target)
+            let url = event.target.getAttribute('href')
+            const result = makeRequest(url)
+            let but = event.target.parentElement.getElementsByClassName('disabled')
+            but[0].classList.remove('disabled')
+            event.target.classList.add('disabled')
+            let count = event.target.parentElement.getElementsByClassName('counter')
+        }
+        catch (error){
+            console.log(error)
+        }
+
+    }
+
+</script>
+{% endblock content %}

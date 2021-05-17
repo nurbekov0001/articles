@@ -1,0 +1,71 @@
+
+{% if is_paginated %}
+    {% include 'partial/paginate.html' %}
+{% endif %}
+
+
+{% for article in articles %}
+    <div class="box">
+        <h3><a href="{% url "article:view" article.pk %}">{{ article.title }}</a></h3>
+        <p>
+            <label for="selected_articles-{{ article.pk }}">Select:</label>
+
+            <input type="checkbox" name="selected_articles"
+
+                   id="selected_articles-{{ article.pk }}" value="{{ article.pk }}">
+        </p>
+
+        <p>
+            <a href="{% url 'accounts:user-detail' article.author_id %}">{{ article.author }}</a>
+            | {{ article.created_at|date:"d.m.Y H:i:s" }}
+        </p>
+        {% if user.is_authenticated %}
+        <div>
+                <a class = 'link {% if article.pk in aricles_like %}disabled{% endif %}' id="like_article"
+                   href="{% url 'article:article_like' article.pk %}" onclick="likeClick(event)"> Like </a>
+                <a class = 'link {% if article.pk not in aricles_like %}disabled{% endif %}' id="unlike_article"
+                   href="{% url 'article:article_unlike' article.pk %}" onclick=likeClick(event)>UnLike</a>
+
+            <span class="counter">{{ article.like_articles.count}} </span>
+            </div>
+        {% endif %}
+    </br>
+    </div>
+
+{% empty %}
+    <h2 class="text-center">Нет статей</h2>
+{% endfor %}
+
+
+{% if is_paginated %}
+     {% include 'partial/paginate.html' %}
+{% endif %}
+
+
+<script>
+    async function makeRequest(url, method='GET') {
+        let response = await fetch(url, {method});
+        if (response.ok) {
+            return await response.json();
+        } else {
+            let error = new Error(response.statusText);
+            error.response = response;
+            throw error;
+        }
+    }
+    likeClick=function async (event) {
+     try{
+            event.preventDefault()
+            console.log(event.target)
+            let url = event.target.getAttribute('href')
+            const result = makeRequest(url)
+            let but = event.target.parentElement.getElementsByClassName('disabled')
+            but[0].classList.remove('disabled')
+            event.target.classList.add('disabled')
+            let count = event.target.parentElement.getElementsByClassName('counter')
+        }
+        catch (error){
+            console.log(error)
+        }
+    }
+</script>
