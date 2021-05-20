@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body class="conteiner">
+<input>
+<input>
+<a href="{% url "api:add" %}">add</a>
+<a href="{% url "api:substract" %}">subtract</a>
+<a href="{% url "api:multiply" %}">multiply</a>
+<a href="{% url "api:divide" %}">divide</a>
+
+</body>
+<script>
+function getCookie(name) {
+var cookieValue = null;
+if (document.cookie && document.cookie !== '') {
+    var cookies = document.cookie.split(';');
+    for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i].trim();
+        // Does this cookie string begin with the name we want?
+        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+            break;
+        }
+    }
+}
+return cookieValue;
+}
+var csrftoken = getCookie('csrftoken');
+
+</script>
+</html>
