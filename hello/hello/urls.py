@@ -23,11 +23,12 @@ from django.conf import settings
 HOMEPAGE_URL = 'articles/'
 
 
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('articles/', include('article.urls')),
-    path('accounts/', include('accounts.urls')),
-    path('api/', include('api.urls')),
-    path('client/', include('webapp.urls')),
-    path('', RedirectView.as_view(url=HOMEPAGE_URL, permanent=False)),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns = {
+                  path('admin/', admin.site.urls),
+                  path('articles/', include('article.urls')),
+                  path('accounts/', include('accounts.urls')),
+                  path('api/', include('api.urls')),
+                  path('api_v2/', include('api_v2.urls')),
+                  path('client/', include('webapp.urls')),
+                  path('', RedirectView.as_view(url=HOMEPAGE_URL, permanent=False)),
+              } + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
