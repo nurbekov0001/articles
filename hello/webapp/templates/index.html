@@ -1,26 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body class="conteiner">
-<input>
-<input>
-<a href="{% url "api:add" %}">add</a>
-<a href="{% url "api:substract" %}">subtract</a>
-<a href="{% url "api:multiply" %}">multiply</a>
-<a href="{% url "api:divide" %}">divide</a>
-
+<input id="A"></br></br>
+<input id="B"></br>
+<a onclick="getResult(event)" href="{% url "api:add" %}">add</a></br>
+<a onclick="getResult(event)" href="{% url "api:substract" %}">subtract</a></br>
+<a onclick="getResult(event)" href="{% url "api:multiply" %}">multiply</a></br>
+<a onclick="getResult(event)" href="{% url "api:divide" %}">divide</a></br>
+<p id="result"></p>
 </body>
 <script>
 function getCookie(name) {
-var cookieValue = null;
+let cookieValue = null;
 if (document.cookie && document.cookie !== '') {
-    var cookies = document.cookie.split(';');
-    for (var i = 0; i < cookies.length; i++) {
-        var cookie = cookies[i].trim();
-        // Does this cookie string begin with the name we want?
+    let cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+        let cookie = cookies[i].trim();
         if (cookie.substring(0, name.length + 1) === (name + '=')) {
             cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
             break;
@@ -29,7 +28,45 @@ if (document.cookie && document.cookie !== '') {
 }
 return cookieValue;
 }
-var csrftoken = getCookie('csrftoken');
 
+async function makeRequest(url, method='GET', body) {
+    let headers = {
+        'X-CSRFToken': getCookie('csrftoken')
+    };
+        let response = await fetch(url, {method, headers:headers, body:body});
+        if (response.ok) {
+            return await response.json();
+        } else {
+            let error = new Error(response.statusText);
+            error.response = response;
+            throw error;
+        }
+    }
+
+    async function getResult(event) {
+        event.preventDefault();
+        let url = event.target.getAttribute('href')
+        console.log(url)
+        let a = document.getElementById('A').value
+        let b = document.getElementById('B').value
+        let body = {"A": a,"B": b}
+        try {
+            let result = await makeRequest(url, 'POST', JSON.stringify(body))
+            console.log(result)
+            let p = document.getElementById('result')
+            p.innerHTML=`Ответ ${result[]}`
+        }
+        catch (e) {
+            console.log(e)
+            let p = document.getElementById('result')
+            p.innerHTML=`Ошибка ${e}`
+
+        }
+    }
+    async function getToken(){
+        await makeRequest('/api/get_token/')
+
+}
+window.addEventListener('load', getToken)
 </script>
 </html>

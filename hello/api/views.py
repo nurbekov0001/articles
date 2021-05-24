@@ -7,6 +7,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie
 
 
 def add_view(request, *args, **kwargs):
+    print(request)
     if request.method == 'POST':
         print(request.body)
         if request.body:
@@ -103,7 +104,7 @@ def divide_view(request, *args, **kwargs):
                     response = JsonResponse({'error': "A or B is not a number"})
                     response.status_code = 400
                     return response
-            elif int(number['B']) == 0:
+            elif number.get('B') == 0:
                 response = JsonResponse({'error': "Division by zero!"})
                 response.status_code = 400
                 return response
@@ -125,5 +126,5 @@ def divide_view(request, *args, **kwargs):
 @ensure_csrf_cookie
 def token(request, *args, **kwargs):
     if request.method == 'GET':
-        return HttpResponse()
+        return HttpResponse(json.dumps({'token': "ok"}))
     return HttpResponseNotAllowed('Only GET request are allowed')
